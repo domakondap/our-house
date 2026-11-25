@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Our house, room by room</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Anek+Telugu:wght@400;500;600&display=swap">
+<style>
+/* Layout: one scrolling page in walking order through the house. Video first, then each room with its numbered designs, then the carpenter notes and the family's choices. */
+:root {
+  --bg: #eff1ee; --panel: #fafbf9; --ink: #221c18; --soft: #5e615b; --line: #cdd2cb; --teak: #86481c; --on-teak: #fffaf4; --veil: rgba(20,17,14,.6);
+  --display: "Marcellus", "Palatino Linotype", Palatino, serif;
+  --body: "Anek Telugu", "Noto Sans Telugu", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #191a18; --panel: #232521; --ink: #efede6; --soft: #aeb2a9; --line: #3b3f39; --teak: #dd9c63; --on-teak: #23160b; --veil: rgba(0,0,0,.72); color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #191a18; --panel: #232521; --ink: #efede6; --soft: #aeb2a9; --line: #3b3f39; --teak: #dd9c63; --on-teak: #23160b; --veil: rgba(0,0,0,.72); color-scheme: dark }
+* { box-sizing: border-box; }
+html { scroll-padding-top: 72px; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.55 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1120px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: clamp(34px, 6vw, 54px); }
+h2 { font-size: clamp(27px, 4vw, 38px); }
+h3 { font-size: 21px; }
+p { margin: 0; max-width: 62ch; }
+ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 66ch; }
+.te { color: var(--teak); font-weight: 500; font-size: 17px; }
+.soft { color: var(--soft); }
+:focus-visible { outline: 3px solid var(--teak); outline-offset: 2px; }
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; gap: 4px 22px; overflow-x: auto; scrollbar-width: none; }
+.nav a { color: var(--ink); text-decoration: none; padding-block: 14px; white-space: nowrap; font-weight: 500; }
+.nav a:hover { color: var(--teak); }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 48px; align-items: center; padding-block: 36px 48px; }
+.hero > div { display: grid; gap: 18px; }
+.hero video { width: 100%; aspect-ratio: 9 / 16; background: #14110e; display: block; border-radius: 6px; }
+.how { list-style: none; padding: 0; display: grid; gap: 0; }
+.how li { padding-block: 10px; border-top: 1px solid var(--line); }
+.how li:last-child { border-bottom: 1px solid var(--line); }
+
+section.room { padding-block: 52px; border-top: 1px solid var(--line); display: grid; gap: 26px; }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 250px); gap: 36px; align-items: end; }
+.head > div { display: grid; gap: 14px; min-width: 0; }
+.today { margin: 0; display: grid; gap: 6px; }
+.today img { width: 100%; max-height: 300px; object-fit: cover; display: block; border-radius: 4px; }
+.today figcaption { font-size: 15px; color: var(--soft); }
+
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; width: fit-content; max-width: 100%; }
+.seg button { border: 0; background: none; padding: 9px 18px; min-height: 44px; }
+.seg button[aria-pressed="true"] { background: var(--teak); color: var(--on-teak); }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 18px; }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { border: 0; background: none; padding: 0; text-align: left; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.card .pic { position: relative; display: block; margin-bottom: 6px; }
+.card img { width: 100%; aspect-ratio: var(--ar); object-fit: cover; display: block; border-radius: 4px; background: var(--line); }
+.card .no { position: absolute; left: 0; bottom: 0; background: var(--panel); color: var(--ink); font-family: var(--display); font-size: 20px; line-height: 1; padding: 9px 13px 7px; border-top-right-radius: 4px; }
+.card strong { font-weight: 600; line-height: 1.3; }
+.card .tag { color: var(--teak); font-size: 15px; font-weight: 500; }
+.card .fin { color: var(--soft); font-size: 15px; line-height: 1.4; }
+.card:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.card[data-chosen] img { outline: 3px solid var(--teak); outline-offset: 2px; }
+
+.sets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 18px; }
+.set { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.set > button { border: 0; padding: 0; background: none; }
+.set img { width: 100%; aspect-ratio: 464 / 580; object-fit: cover; display: block; border-radius: 4px; }
+.set dl { margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 16px; }
+.set dd { margin: 0; text-align: right; }
+.link { border: 0; background: none; padding: 2px 0; color: var(--teak); text-decoration: underline; text-underline-offset: 3px; font-variant-numeric: tabular-nums; }
+
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 34px 44px; }
+.notes > div { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; background: #fff; }
+.scroll img { display: block; width: 100%; min-width: 820px; max-width: none; height: auto; }
+
+.chosen { list-style: none; padding: 0; gap: 0; max-width: 640px; }
+.chosen li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding-block: 11px; border-top: 1px solid var(--line); }
+.chosen li:last-child { border-bottom: 1px solid var(--line); }
+.btn { border: 1px solid var(--teak); background: var(--teak); color: var(--on-teak); border-radius: 6px; padding: 10px 20px; min-height: 46px; font-weight: 500; width: fit-content; }
+.btn.ghost { background: none; color: var(--teak); }
+.btn, .seg button, .x { line-height: 1; padding-top: 13px; padding-bottom: 9px; }
+.btn:disabled { opacity: .45; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+dialog { border: 0; padding: 0; background: var(--panel); color: var(--ink); width: min(1040px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border-radius: 8px; overflow: auto; }
+dialog::backdrop { background: var(--veil); }
+.view { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.view .shot { background: #14110e; display: grid; align-items: center; min-width: 0; }
+.view .shot img { width: 100%; max-height: calc(100dvh - 24px); object-fit: contain; display: block; }
+.view .info { padding: 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.info .top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.x { border: 1px solid var(--line); background: none; border-radius: 6px; min-width: 46px; min-height: 46px; }
+.info dl { margin: 0; display: grid; gap: 0; }
+.info dl div { display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 12px; padding-block: 9px; border-top: 1px solid var(--line); }
+.info dt { color: var(--soft); }
+.info dd { margin: 0; }
+.sw { display: inline-flex; gap: 6px; }
+.sw i { width: 34px; height: 24px; border-radius: 3px; border: 1px solid var(--line); }
+
+@media (max-width: 860px) {
+  .hero, .view, .notes { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .view { gap: 0; }
+  .hero video { max-width: 420px; margin-inline: auto; }
+  .head { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .today img { max-height: 240px; }
+  .grid, .grid.three, .sets { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 14px; }
+  .view .shot img { max-height: 56dvh; }
+  .view .info { padding: 18px 16px 24px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Rooms"><div class="wrap">
+  <a href="#video">Video</a><a href="#hall">Hall</a><a href="#kitchen">Kitchen</a><a href="#chimney">Chimney</a><a href="#pooja">Pooja room</a><a href="#wardrobes">Bedrooms</a><a href="#carpenter">For the carpenter</a><a href="#choice">Our choice</a>
+</div></nav>
+
+<main class="wrap">
+  <header class="hero" id="video">
+    <div>
+      <p class="te">మన ఇల్లు</p>
+      <h1>Our house, room by room</h1>
+      <p>Interior designs drawn on photos of our own house. Watch the video first, then open each room and pick the number you like.</p>
+      <ul class="how">
+        <li><strong id="total"></strong> designs in five places: hall, kitchen, chimney, pooja room and bedrooms.</li>
+        <li>Tap any photo to see it large, see the room as it is today, and read the details.</li>
+        <li>Press <strong>Choose this</strong> on one design in each room, then send the list to the family or the carpenter.</li>
+      </ul>
+    </div>
+    <video controls playsinline preload="metadata" poster="web/house-video.jpg" aria-label="Walk through the house, before and after"><source src="web/house-video.mp4" type="video/mp4"></video>
+  </header>
+
+  <section class="room" id="sets">
+    <div class="head"><div><h2>Four ready sets</h2><p>Each set goes together from the hall to the bedrooms. The video shows the same sets and numbers, without the chimney.</p></div></div>
+    <div class="sets" id="setList"></div>
+  </section>
+
+  <div id="rooms"></div>
+
+  <section class="room" id="carpenter">
+    <div class="head"><div><p class="te">వడ్రంగి కోసం</p><h2>For the carpenter</h2><p>The pictures show the look. Sizes are estimates from the video, so measure everything on site before cutting.</p></div></div>
+    <div class="notes">
+      <div><h3>Before starting</h3><ul>
+        <li>Ask for real laminate samples and look at them in each room, by day and at night.</li>
+        <li>Do anti-termite treatment where wood touches the wall.</li>
+        <li>Run wires for TV, lights and chimney before any panel is fixed.</li>
+        <li>Keep all top lines level with each other.</li>
+      </ul></div>
+      <div><h3>Hall</h3><ul>
+        <li>Remove the old cement shelf under the TV and finish the wall behind it.</li>
+        <li>Low unit about 460 mm (1.5 ft) high, lifted off the floor. No. 7 is about 560 mm and goes down to the floor.</li>
+        <li>The TV is drawn as 50 inch, bottom edge about 720 mm above the floor.</li>
+      </ul></div>
+      <div><h3>Chimney</h3><ul>
+        <li>Buy the chimney first, then cut the boards to fit it.</li>
+        <li>Bottom of the chimney 610 to 760 mm above the burner. The manual of your model decides.</li>
+        <li>Cupboard 600 mm high, top level with the window. The wall above stays open.</li>
+        <li>Pipe 6 inch, short, few bends. Nos. 1, 2, 4, 8 and 9 need a new hole behind the cupboard. If that is not possible, use a slim pipe cover up to the old hole, as in Nos. 3 and 5.</li>
+        <li>Remove the old cement shelf on the side wall.</li>
+      </ul></div>
+      <div><h3>Bedrooms</h3><ul>
+        <li>Two colours only, handles and bottom strip included.</li>
+        <li>Loft line level with the top of today&rsquo;s shelf.</li>
+        <li>Doors 450 to 600 mm wide, at least 3 soft-close hinges on tall doors.</li>
+        <li>The third bedroom was too blurred in the video to draw, but these designs fit it too.</li>
+      </ul></div>
+      <div><h3>Pooja room</h3><ul>
+        <li>Sri Venkateswara Swamy in the centre, Ganesha on your left, Lakshmi or Padmavathi Ammavaru on your right.</li>
+        <li>Raise the idols on a peetham, feet at chest height when you stand.</li>
+        <li>Face east or north while praying. Keep the diya clear of wood.</li>
+        <li>Follow your elders and priest first.</li>
+      </ul></div>
+      <div><h3>Kitchen</h3><ul>
+        <li>The layout stays the same. Tiles, window and black granite stay as they are.</li>
+        <li>No divider at the entrance. The opening from the hall stays fully open.</li>
+        <li>Use BWP (boiling water proof) ply, and a strip light under the wall cupboards.</li>
+      </ul></div>
+    </div>
+    <h3>Chimney drawing with sizes (mm)</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Chimney drawing, scroll sideways on a phone"><img src="Chimney-Carpenter-Drawing.jpg" alt="Front and side drawing of the chimney cupboard with sizes in millimetres" loading="lazy"></div>
+  </section>
+
+  <section class="room" id="choice">
+    <div class="head"><div><h2>Our choice</h2><p>Your choices are kept on this phone or computer only. Copy the list and send it to everyone.</p></div></div>
+    <ul class="chosen" id="chosen"></ul>
+    <div class="row"><button class="btn" id="copy" type="button">Copy the list</button><span id="copied" class="soft" role="status"></span></div>
+  </section>
+</main>
+
+<dialog id="dlg" aria-labelledby="dName">
+  <div class="view">
+    <div class="shot"><img id="dImg" alt=""></div>
+    <div class="info">
+      <div class="top"><div><p class="te" id="dNo"></p><h3 id="dName"></h3></div><button class="x" id="dClose" type="button" aria-label="Close">&#10005;</button></div>
+      <div class="row"><div class="seg" role="group" aria-label="Show"><button type="button" id="sNew">Design</button><button type="button" id="sOld">Today</button></div>
+      <div class="seg" id="dBeds" role="group" aria-label="Bedroom"><button type="button" data-b="bedroom1">Bed 1</button><button type="button" data-b="bedroom2">Bed 2</button></div></div>
+      <p id="dWhy"></p>
+      <dl id="dRows"></dl>
+      <div class="row"><button class="btn" id="dPick" type="button"></button><button class="btn ghost" id="dPrev" type="button">Previous</button><button class="btn ghost" id="dNext" type="button">Next</button></div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const DATA = {"kitchen": {"label": "Kitchen", "items": [{"id": "classic-teak", "name": "Classic Teak", "why": "Warm wood that matches your teak window frame. This is your first board’s option 1, redone on the real layout.", "pick": "", "sw": ["#8a5526", "#8a5526"], "rows": [["Lower units", "Teak veneer or teak laminate"], ["Upper units", "Teak, with 2 lit glass doors"], ["Doors", "Raised panel with crown moulding"], ["Handles", "Antique brass, ornate"], ["Keep in mind", "A lot of brown with the window frame. Good lighting matters here."], ["Cleaning", "Medium. Veneer needs polish every few years."]]}, {"id": "temple-arch-rosewood", "name": "Temple Arch Rosewood", "why": "The arched door panels repeat the arch in your window grill. The most distinctive traditional look here.", "pick": "", "sw": ["#4a2015", "#4a2015"], "rows": [["Lower units", "Rosewood-tone veneer"], ["Upper units", "Rosewood, with 2 gold jali glass doors"], ["Doors", "Arched raised panel, custom routed"], ["Handles", "Gold, ornate"], ["Keep in mind", "The darkest option, so the kitchen will feel smaller."], ["Cleaning", "Needs care. Dust shows on dark polish."]]}, {"id": "ivory-brass", "name": "Ivory & Brass", "why": "Traditional doors in a light colour, so the room stays bright. This is your first board’s option 2 on the real layout.", "pick": "Best traditional pick", "sw": ["#e9e2d0", "#e9e2d0"], "rows": [["Lower units", "Ivory PU paint"], ["Upper units", "Ivory, with 2 lit glass doors"], ["Doors", "Raised panel with crown moulding"], ["Handles", "Brushed brass bars"], ["Keep in mind", "Turmeric and oil marks show near the hob. Choose a washable PU finish."], ["Cleaning", "Medium. Wipe the area near the hob often."]]}, {"id": "royal-blue-gold", "name": "Royal Blue & Gold", "why": "Rich and festive, with gold jali glass in the uppers. This is your first board’s option 3 on the real layout.", "pick": "", "sw": ["#142454", "#142454"], "rows": [["Lower units", "Deep blue PU paint"], ["Upper units", "Blue, with 2 gold jali glass doors"], ["Doors", "Raised panel with crown moulding"], ["Handles", "Gold, ornate"], ["Keep in mind", "Strong blue, gold and a busy tile all compete. It is a lot to live with every day."], ["Cleaning", "Medium. Fingerprints show on dark paint."]]}, {"id": "sage-brass", "name": "Sage & Brass", "why": "A soft grey-green that sits well with your grey tile. Colourful without being loud.", "pick": "", "sw": ["#89987c", "#89987c"], "rows": [["Lower units", "Sage laminate or PU paint"], ["Upper units", "Sage"], ["Doors", "Shaker, a simple frame"], ["Handles", "Brass cup pulls and knobs"], ["Keep in mind", "Cup pulls collect dust and oil on the inside."], ["Cleaning", "Easy. Mid tones hide marks well."]]}, {"id": "forest-green-teak", "name": "Forest Green & Teak", "why": "Teak uppers tie in with the window, and dark green below hides everyday marks. Bold, but still warm.", "pick": "Best bold pick", "sw": ["#8a5526", "#204234"], "rows": [["Lower units", "Forest green PU paint"], ["Upper units", "Teak, with 2 reeded glass doors"], ["Doors", "Shaker"], ["Handles", "Brushed brass bars"], ["Keep in mind", "Darker overall, so keep the strip light under the uppers."], ["Cleaning", "Easy on the lowers. Fingerprints show on matte green."]]}, {"id": "navy-white", "name": "Navy & White", "why": "A timeless pair. White uppers lift the room while navy below keeps it grounded.", "pick": "", "sw": ["#eeece4", "#1e2a42"], "rows": [["Lower units", "Navy laminate or acrylic"], ["Upper units", "White"], ["Doors", "Shaker"], ["Handles", "Long gold bars"], ["Keep in mind", "White uppers show oil near the chimney."], ["Cleaning", "Easy. Laminate wipes clean."]]}, {"id": "wine-brass", "name": "Wine & Brass", "why": "Deep and rich, and unlike most kitchens you will see. Glows beautifully with warm lights.", "pick": "", "sw": ["#5c1c2a", "#5c1c2a"], "rows": [["Lower units", "Wine PU paint"], ["Upper units", "Wine, with 2 reeded glass doors"], ["Doors", "Raised panel with crown moulding"], ["Handles", "Brass cup pulls and knobs"], ["Keep in mind", "A strong colour you may tire of. Check a large sample first."], ["Cleaning", "Medium. Fingerprints show on dark paint."]]}, {"id": "terracotta-oak", "name": "Terracotta & Oak", "why": "Earthy and homely, with warm clay below and pale oak above.", "pick": "", "sw": ["#b9a074", "#a6583e"], "rows": [["Lower units", "Terracotta laminate"], ["Upper units", "Light oak laminate"], ["Doors", "Shaker below, plain above"], ["Handles", "Long black bars"], ["Keep in mind", "Warm clay against your cool grey tile is a contrast some people will not like."], ["Cleaning", "Easy. Hides turmeric marks well."]]}, {"id": "greige-fluted", "name": "Fluted Greige", "why": "Fine vertical grooves give a hotel-like, current look in a quiet colour.", "pick": "", "sw": ["#b0a696", "#b0a696"], "rows": [["Lower units", "Fluted panel, greige paint"], ["Upper units", "Fluted greige"], ["Doors", "Fluted, with plain drawers"], ["Handles", "Long brass bars"], ["Keep in mind", "Grooves near the hob trap grease. Consider plain doors right beside it."], ["Cleaning", "Needs care. Clean the grooves with a brush."]]}, {"id": "charcoal-handleless", "name": "Charcoal Handleless", "why": "Clean lines with no handles, and it blends with the black platform for a very sleek look.", "pick": "", "sw": ["#343639", "#343639"], "rows": [["Lower units", "Matte charcoal laminate"], ["Upper units", "Matte charcoal"], ["Doors", "Plain with a grip rail"], ["Handles", "None, black grip rail"], ["Keep in mind", "Dark on dark can feel heavy in a kitchen with one window."], ["Cleaning", "Medium. Choose an anti-fingerprint finish."]]}, {"id": "white-gloss", "name": "White Gloss Acrylic", "why": "The brightest option. Reflects light and gives the most contrast with the black platform.", "pick": "", "sw": ["#ecece8", "#ecece8"], "rows": [["Lower units", "White acrylic"], ["Upper units", "White acrylic"], ["Doors", "Plain with a grip rail"], ["Handles", "None, steel grip rail"], ["Keep in mind", "Gloss shows scratches, and white can look plain next to tile unless the lighting is warm."], ["Cleaning", "Easiest to wipe clean."]]}, {"id": "walnut-cream", "name": "Walnut & Cream", "why": "Walnut echoes your window frame, cream keeps the room bright, and plain doors stay calm beside the busy tile.", "pick": "", "sw": ["#e8e0ce", "#4d3020"], "rows": [["Lower units", "Walnut laminate or veneer"], ["Upper units", "Cream"], ["Doors", "Plain"], ["Handles", "Long brass bars"], ["Keep in mind", "Cream uppers need regular wiping near the chimney."], ["Cleaning", "Easy on the lowers. Wood grain hides marks."]]}, {"id": "light-oak", "name": "Light Oak", "why": "Airy and simple, with natural wood and slim black handles.", "pick": "", "sw": ["#c8a878", "#c8a878"], "rows": [["Lower units", "Light oak laminate"], ["Upper units", "Light oak"], ["Doors", "Plain"], ["Handles", "Long black bars"], ["Keep in mind", "Pale wood next to your dark window frame is a clear contrast, not a match."], ["Cleaning", "Easy. Grain hides marks."]]}, {"id": "grey-teak", "name": "Slate Grey & Teak", "why": "Grey lowers match your tile, and teak uppers match your window. Everything in the room ties together.", "pick": "", "sw": ["#8a5526", "#70767a"], "rows": [["Lower units", "Slate grey laminate"], ["Upper units", "Teak laminate"], ["Doors", "Plain"], ["Handles", "Long steel bars"], ["Keep in mind", "A lot of grey low down if the room gets little daylight."], ["Cleaning", "Easy. Grey hides everyday marks."]]}, {"id": "mustard-walnut", "name": "Mustard & Walnut", "why": "Cheerful and a little retro. The most playful option.", "pick": "", "sw": ["#4d3020", "#be8e2a"], "rows": [["Lower units", "Mustard PU paint"], ["Upper units", "Walnut laminate"], ["Doors", "Shaker below, plain above"], ["Handles", "Antique brass knobs"], ["Keep in mind", "Very strong colour, and turmeric stains blend in but dust does not."], ["Cleaning", "Medium. Wipe the door frames often."]]}, {"id": "walnut-ivory-glass", "name": "Walnut & Ivory Glass", "why": "Warm walnut below, and ivory gloss uppers where every door is glass with warm light inside. Elegant at night and still bright by day.", "pick": "My first choice", "sw": ["#efebe2", "#4d3020"], "rows": [["Lower units", "Walnut laminate or veneer"], ["Upper units", "Ivory gloss, all four doors lit glass"], ["Doors", "Plain"], ["Handles", "Long gold bar handles, light along the floor"], ["Keep in mind", "Glass doors show what is inside, so keep the shelves tidy."], ["Cleaning", "Easy on the lowers. Wipe glass weekly."]]}, {"id": "emerald-brass", "name": "Emerald & Brass", "why": "Deep emerald with brass and reeded glass. A rich, classic look that hides everyday marks.", "pick": "", "sw": ["#1c483c", "#1c483c"], "rows": [["Lower units", "Emerald PU paint"], ["Upper units", "Emerald, with 2 reeded glass doors"], ["Doors", "Shaker with crown moulding"], ["Handles", "Brass bar handles"], ["Keep in mind", "Dark colour needs good lighting, especially under the wall cabinets."], ["Cleaning", "Medium. Fingerprints show on dark paint."]]}, {"id": "greige-fluted-gold", "name": "Greige Fluted & Gold", "why": "Fine vertical fluting in soft greige with gold handles and oak uppers. A current, hotel-like kitchen.", "pick": "", "sw": ["#b8aea0", "#c8a878"], "rows": [["Lower units", "Fluted greige (HDHMR)"], ["Upper units", "Light oak, with 2 lit glass doors"], ["Doors", "Fluted below, plain above"], ["Handles", "Long gold bar handles, light along the floor"], ["Keep in mind", "Grooves near the hob collect grease. Clean with a soft brush."], ["Cleaning", "Needs care."]]}, {"id": "navy-gold-glass", "name": "Navy & Gold Glass", "why": "Navy shaker below and white glass uppers lit from inside, with gold handles. Smart and timeless.", "pick": "", "sw": ["#eeece4", "#1e2a46"], "rows": [["Lower units", "Navy PU paint"], ["Upper units", "White, all four doors lit glass"], ["Doors", "Shaker with crown moulding"], ["Handles", "Gold bar handles"], ["Keep in mind", "White uppers near the chimney need regular wiping."], ["Cleaning", "Easy on the lowers."]]}], "ar": "1021 / 1024", "img": "kitchen/renders/{id}.jpg", "thumb": "web/kitchen-{id}.jpg", "site": "kitchen/renders/site.jpg"}, "hall": {"label": "Hall TV wall", "items": [{"id": "walnut-beige-low", "name": "Walnut Panel & Low Beige Unit", "sw": ["#68462f", "#e4d6c0"], "why": "A ribbed walnut panel just behind the TV and a low beige drawer unit with a walnut top. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "My first choice", "rows": [["Finish", "Walnut fluted panel, beige matte drawers, walnut top"], ["Keep in mind", "Run the power and cable pipes before the panel goes up."]]}, {"id": "teak-low", "name": "Teak Panel & Low Teak Unit", "sw": ["#8c5a33", "#e4d6c0"], "why": "Wide teak boards behind the TV and a low teak unit, the same wood as your doors. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "Matches your doors", "rows": [["Finish", "Teak laminate boards and drawers"], ["Keep in mind", "Match the teak laminate to your door polish."]]}, {"id": "walnut-side-shelf", "name": "Beige Panel & Walnut Side Shelf", "sw": ["#e4d6c0", "#68462f"], "why": "A soft ribbed beige panel, a low walnut unit and one slim open shelf at the side with warm lights. The shelf is only as high as the panel. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "", "rows": [["Finish", "Beige fluted panel, walnut drawers and shelf"], ["Keep in mind", "Keep only three or four things on the shelf."]]}, {"id": "marble-teak-low", "name": "Beige Marble & Low Teak Unit", "sw": ["#dfd0b8", "#8c5a33"], "why": "One beige marble panel behind the TV and a low teak unit. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "", "rows": [["Finish", "Beige marble-look sheet, teak laminate drawers"], ["Keep in mind", "Choose a sheet with few veins and no repeating pattern."]]}, {"id": "walnut-slat-sides", "name": "Walnut Slats on Both Sides", "sw": ["#68462f", "#e4d6c0"], "why": "Slim walnut slats on both sides of the TV under one thin walnut line, and a low walnut unit. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "", "rows": [["Finish", "Walnut slats and drawers on a beige wall"], ["Keep in mind", "Slats need dusting. Keep them to these two strips."]]}, {"id": "rosewood-ledge", "name": "Low Rosewood Unit & One Ledge", "sw": ["#5e2f20", "#e4d6c0"], "why": "Nothing behind the TV, only one long thin ledge above it and a low rosewood unit. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "Simplest", "rows": [["Finish", "Rosewood laminate drawers and ledge"], ["Keep in mind", "Fix the ledge with hidden steel brackets."]]}, {"id": "walnut-drawers", "name": "Low Walnut Drawers, Most Storage", "sw": ["#68462f", "#e4d6c0"], "why": "Two rows of walnut drawers down to the floor, still only about 560 mm (under 2 ft) high, with a ribbed beige panel behind the TV. No tall cupboards and no lofts; the wall above stays open.", "pick": "Most storage", "rows": [["Finish", "Walnut laminate drawers, beige fluted panel"], ["Keep in mind", "Use soft-close channels. Wide drawers get heavy."]]}, {"id": "honey-shelves", "name": "Low Honey Oak Unit & Two Shelves", "sw": ["#a87b4b", "#e4d6c0"], "why": "The TV on the plain wall, two short shelves beside it and a low honey oak unit. One low unit only, about 460 mm (1.5 ft) high, lifted off the floor. No tall cupboards and no lofts; the wall above stays open in warm beige paint. ", "pick": "", "rows": [["Finish", "Honey oak laminate drawers and two shelves"], ["Keep in mind", "Hide the TV wires inside the wall before painting."]]}], "ar": "464 / 580", "img": "renders3/s-hall-{id}.jpg", "thumb": "web/hall-{id}.jpg", "site": "renders3/s-hall-site.jpg"}, "chimney": {"label": "Chimney cupboard", "items": [{"id": "walnut-hidden", "name": "Walnut, Hidden Chimney", "sw": ["#50331f", "#c89a4c"], "why": "Two even walnut doors hide the chimney; one thin wood line runs over the window and round the corner. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two glass doors and an open lit end. Your own tiles, window and granite stay as they are.", "pick": "My first choice", "rows": [["Finish", "Walnut laminate or veneer on BWP ply, brass handles, 60 cm built-in chimney"], ["Keep in mind", "Built-in (insert) chimney only. The pipe needs a 6 inch hole behind the cupboard; if that is not possible, a slim wood pipe cover goes up to the hole under the ceiling."]]}, {"id": "teak-doors", "name": "Teak, Like Your Doors", "sw": ["#9a5a2a", "#c89a4c"], "why": "The same warm teak as your doors and window, with even panel doors. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: one glass door, then open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Teak veneer or laminate on BWP ply, brass handles, 60 cm built-in chimney"], ["Keep in mind", "Built-in (insert) chimney only. The pipe needs a 6 inch hole behind the cupboard; if that is not possible, a slim wood pipe cover goes up to the hole under the ceiling. Hold the sample against your door first."]]}, {"id": "walnut-fluted", "name": "Walnut Fluted", "sw": ["#50331f", "#6e4a30"], "why": "A walnut front with soft grooves and one brass line, and a slim grooved cover for the pipe. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two glass doors, then open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Fluted walnut push-to-open doors, 60 cm built-in chimney"], ["Keep in mind", "The slim cover hides the pipe up to the hole under the ceiling. Ask for one removable panel. Grooves catch oil: wipe weekly."]]}, {"id": "rosewood-brass", "name": "Rosewood with Brass Line", "sw": ["#5a2818", "#cda050"], "why": "Deep rosewood doors with a thin brass line, and brass along the top. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two glass doors and an open lit end. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Rosewood veneer or laminate, thin brass inlay, 60 cm built-in chimney"], ["Keep in mind", "Built-in (insert) chimney only. The pipe needs a 6 inch hole behind the cupboard; if that is not possible, a slim wood pipe cover goes up to the hole under the ceiling. A dark colour: keep good lights on."]]}, {"id": "teak-walnut-band", "name": "Teak with Walnut Band", "sw": ["#9a5a2a", "#50331f"], "why": "Teak above, walnut below, and a walnut band with two brass lines over the chimney. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two glass doors, then open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Teak and walnut laminate, brass strips, 60 cm built-in chimney"], ["Keep in mind", "The slim cover hides the pipe up to the hole under the ceiling. Ask for one removable panel."]]}, {"id": "walnut-black-glass", "name": "Walnut with Black Glass Chimney", "sw": ["#50331f", "#121214"], "why": "No cupboard over the stove at all: a black glass chimney on the tiled wall with a slim walnut pipe cover. The lightest look. Side cupboards: open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "60 cm wall-mounted black glass chimney, walnut pipe cover and window ledge"], ["Keep in mind", "The least storage. Match the tile where the old round patch is."]]}, {"id": "teak-steel", "name": "Teak with Steel Chimney", "sw": ["#9a5a2a", "#a9a9ab"], "why": "No cupboard over the stove: a steel chimney with its own steel pipe cover, the easiest to buy and service. Side cupboards: one glass door, then open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "60 cm steel chimney with pipe cover, teak window ledge"], ["Keep in mind", "The least storage. Order the long pipe cover. Match the tile where the old round patch is."]]}, {"id": "mahogany-plain", "name": "Mahogany, Plain Doors", "sw": ["#6e3018", "#c89a4c"], "why": "Plain flat mahogany doors with no grooves and no lines, the easiest to clean. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two plain doors, then open lit shelves. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Mahogany laminate on BWP ply, brass handles, 60 cm built-in chimney"], ["Keep in mind", "Built-in (insert) chimney only. The pipe needs a 6 inch hole behind the cupboard; if that is not possible, a slim wood pipe cover goes up to the hole under the ceiling."]]}, {"id": "honey-espresso", "name": "Honey Oak & Dark Wood", "sw": ["#a8743f", "#3a2519"], "why": "Honey wood above and dark wood below, joined by one dark line along the top. The tops stop level with the window, about 2 ft high, and the wall above stays open. Side cupboards: two glass doors and an open lit end. Your own tiles, window and granite stay as they are.", "pick": "", "rows": [["Finish", "Honey oak and espresso laminate on BWP ply, brass handles, 60 cm built-in chimney"], ["Keep in mind", "Built-in (insert) chimney only. The pipe needs a 6 inch hole behind the cupboard; if that is not possible, a slim wood pipe cover goes up to the hole under the ceiling. Match both samples in your kitchen light."]]}], "ar": "1400 / 1557", "img": "renders3/low-{id}.jpg", "thumb": "web/chimney-{id}.jpg", "site": "renders3/wood-site.jpg"}, "pooja": {"label": "Pooja room", "items": [{"id": "teak-temple-arch", "name": "Teak Temple Arch", "sw": ["#8a5526", "#f4e6c8"], "why": "Sri Venkateswara Swamy in the centre with Ganesha on the left and Lakshmi on the right, brass deepam stands on both sides. A carved teak arch with a gold edge around a backlit lotus jali, brass bells and a marigold garland. The old window becomes a matching arched teak jali screen glowing with daylight. Teak drawers below with a white marble top.", "pick": "My first choice", "rows": [["Finish", "Teak arch and drawers, CNC lotus jali with LED behind, white marble top"], ["Keep in mind", "Keep the diya clear of the wood. Use a brass plate under it."]]}, {"id": "white-marble-gold", "name": "White Marble & Gold", "sw": ["#f0eee8", "#dcb060"], "why": "Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi, and brass deepam stands. A white marble wall with a gold arch, a glowing lotus jali and white gloss drawers with gold handles. Bright and pure.", "pick": "", "rows": [["Finish", "Marble or marble-look cladding, gold-finish arch, white gloss drawers"], ["Keep in mind", "Marble-look panels are lighter and easier to fix than real marble."]]}, {"id": "ivory-jali-brass", "name": "Ivory Jali & Brass", "sw": ["#ebe1cc", "#c8a050"], "why": "Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi, and brass deepam stands. Soft ivory fluting, an ivory arch with a gold edge and a backlit lattice jali. Calm and traditional.", "pick": "", "rows": [["Finish", "Ivory fluted wall panel, ivory PU arch, lattice jali, ivory framed drawers"], ["Keep in mind", "Ivory near the diya darkens over time. Wipe smoke marks weekly."]]}, {"id": "walnut-mandala", "name": "Walnut Mandala", "sw": ["#4d3020", "#f2e6cc"], "why": "Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi, and brass deepam stands. Walnut wall panelling with a walnut arch around a glowing mandala jali, and walnut drawers. Rich and modern.", "pick": "", "rows": [["Finish", "Walnut laminate panelling, walnut arch, CNC mandala jali, walnut drawers"], ["Keep in mind", "Dark wood needs good light. Keep the jali light on in the evening."]]}, {"id": "rosewood-heritage", "name": "Rosewood Heritage", "sw": ["#5c1c1c", "#ccaa58"], "why": "Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi, and brass deepam stands. A deep red panel with a rosewood arch and a golden mandala, like a temple. Very traditional.", "pick": "", "rows": [["Finish", "Rosewood-tone arch and drawers, red lacquer panel, gold mandala jali"], ["Keep in mind", "The darkest look. Best if the window gives good daylight."]]}, {"id": "sage-lotus-oak", "name": "Sage Lotus & Oak", "sw": ["#9eb298", "#c8a878"], "why": "Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi, and brass deepam stands. A soft sage panel with a light oak arch and a white lotus jali. Fresh and peaceful.", "pick": "", "rows": [["Finish", "Sage paint panel, oak arch and drawers, white lotus jali"], ["Keep in mind", "The simplest one to make."]]}], "ar": "464 / 832", "img": "renders3/pooja-{id}.jpg", "thumb": "web/pooja-{id}.jpg", "site": "renders3/pooja-site.jpg"}, "wardrobes": {"label": "Bedroom wardrobes", "items": [{"id": "beige-walnut-column", "name": "Beige & Walnut Column", "sw": ["#e4d6c0", "#68462f"], "why": "Two colours only: warm beige doors with one walnut column. In bedroom 2 the walnut column carries a long plain mirror instead of a dresser. The loft line is level with the top of today's shelf. ", "pick": "My first choice", "rows": [["Finish", "Beige matte laminate, walnut laminate column and plinth"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Use a matte anti-fingerprint beige. Ask for the mirror to be fixed with safety film behind."]]}, {"id": "teak-beige-loft", "name": "Teak Doors & Beige Loft", "sw": ["#8c5a33", "#e4d6c0"], "why": "Two colours only: plain teak doors like your house doors, with a beige loft that keeps the top light. The loft line is level with the top of today's shelf. ", "pick": "Matches your doors", "rows": [["Finish", "Teak laminate doors and plinth, beige matte laminate loft"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Match the teak laminate to your door polish."]]}, {"id": "beige-walnut-lower", "name": "Beige & Walnut Lower", "sw": ["#e4d6c0", "#68462f"], "why": "Two colours only: beige above and walnut on the lower third, where doors get scuffed. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Beige matte laminate, walnut laminate lower third and plinth"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Make the colour change a real joint, at the same height on every door."]]}, {"id": "walnut-cream-column", "name": "Walnut & Cream Column", "sw": ["#68462f", "#eadec8"], "why": "Two colours only: walnut doors with one cream column. In bedroom 2 the cream column carries a long plain mirror. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Walnut laminate doors and plinth, cream matte laminate column"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "A darker room. Best with light walls and curtains."]]}, {"id": "sage-oak-column", "name": "Sage & Oak Column", "sw": ["#acb098", "#c7a170"], "why": "Two colours only: soft sage doors with one oak column. In bedroom 2 the oak column carries a long plain mirror. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Sage matte laminate, oak laminate column and plinth"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Sage looks different under warm and cool bulbs. Check the sample at night."]]}, {"id": "rosewood-cream-classic", "name": "Rosewood Classic & Cream Loft", "sw": ["#5e2f20", "#eadec8"], "why": "Two colours only: rosewood framed doors, the traditional choice, with a cream framed loft. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Rosewood laminate or veneer framed doors, cream framed loft"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Framed doors need dusting along the frames."]]}, {"id": "honey-espresso", "name": "Honey Oak & Dark Wood", "sw": ["#a87b4b", "#4d3527"], "why": "Two woods only: honey oak doors with one dark wood column. In bedroom 2 the dark column carries a long plain mirror. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Honey oak laminate, dark walnut laminate column and plinth"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "See both woods side by side as samples. Their undertones must agree."]]}, {"id": "sand-fluted-teak", "name": "Sand & Fluted Teak", "sw": ["#dac8ac", "#8c5a33"], "why": "Two colours only: sand doors with one teak column in soft vertical ribs. The loft line is level with the top of today's shelf. ", "pick": "", "rows": [["Finish", "Sand matte laminate, fluted teak panel column, teak plinth"], ["Handles", "Slim bar handles in the other colour"], ["Keep in mind", "Ribs collect dust. Brush them now and then."]]}], "ar": "464 / 832", "img": "renders3/s-{bed}-{id}.jpg", "thumb": "web/{bed}-{id}.jpg", "site": "renders3/s-{bed}-site.jpg"}};
+const ORDER = ['hall', 'kitchen', 'chimney', 'pooja', 'wardrobes'];
+const ROOM = {
+  hall: { n: 'Hall', te: 'హాలు', w: 'Hall', t: 'One low unit under the TV. No tall cupboards and no lofts; the wall above stays open in warm beige.' },
+  kitchen: { n: 'Kitchen', te: 'వంటగది', w: 'Kitchen', t: 'Same layout in every picture. Only the wood, colours, doors and handles change.' },
+  chimney: { n: 'Chimney cupboard', te: 'చిమ్నీ', w: 'Chimney', t: 'Low wood cupboards, about 2 ft high and level with the window. The wall above stays open.' },
+  pooja: { n: 'Pooja room', te: 'పూజ గది', w: 'Pooja', t: 'Sri Venkateswara Swamy in the centre with Ganesha and Lakshmi. The window becomes a matching jali.' },
+  wardrobes: { n: 'Bedroom wardrobes', te: 'పడక గదులు', w: 'Wardrobe', t: 'Two colours only in every design. Switch between the two bedrooms here.' }
+};
+const SETS = [
+  ['Walnut & Beige', 'First choice', { hall: 'walnut-beige-low', kitchen: 'walnut-ivory-glass', chimney: 'walnut-hidden', pooja: 'walnut-mandala', wardrobes: 'beige-walnut-column' }],
+  ['Teak Heritage', 'Matches our doors', { hall: 'teak-low', kitchen: 'classic-teak', chimney: 'teak-doors', pooja: 'teak-temple-arch', wardrobes: 'teak-beige-loft' }],
+  ['Ivory, Marble & Brass', 'Soft and classic', { hall: 'marble-teak-low', kitchen: 'ivory-brass', chimney: 'teak-doors', pooja: 'white-marble-gold', wardrobes: 'beige-walnut-lower' }],
+  ['Soft & Fresh', 'Sage and light oak', { hall: 'honey-shelves', kitchen: 'sage-brass', chimney: 'honey-espresso', pooja: 'sage-lotus-oak', wardrobes: 'sage-oak-column' }]
+];
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+const url = (r, kind, id, bed) => DATA[r][kind].replace('{id}', id).replace('{bed}', bed || 'bedroom2');
+const at = (r, id) => DATA[r].items.findIndex(o => o.id === id);
+let bed = 'bedroom2', cur = null, old = false, chosen = {};
+try { chosen = JSON.parse(localStorage.getItem('house-choice') || '{}') || {}; } catch (e) { chosen = {}; }
+ORDER.forEach(r => { if (at(r, chosen[r]) < 0) delete chosen[r]; });
+
+$('total').textContent = ORDER.reduce((n, r) => n + DATA[r].items.length, 0);
+$('setList').innerHTML = SETS.map(([name, sub, p]) => `<article class="set">
+  <button type="button" data-r="hall" data-i="${at('hall', p.hall)}" aria-label="${esc(name)}: open the hall design"><img src="${url('hall', 'thumb', p.hall)}" alt="" loading="lazy"></button>
+  <h3>${esc(name)}</h3><p class="soft">${esc(sub)}</p>
+  <dl>${ORDER.map(r => `<dt>${ROOM[r].w}</dt><dd><button type="button" class="link" data-r="${r}" data-i="${at(r, p[r])}">No. ${at(r, p[r]) + 1}</button></dd>`).join('')}</dl></article>`).join('');
+
+$('rooms').innerHTML = ORDER.map(r => `<section class="room" id="${r}">
+  <div class="head"><div><p class="te">${ROOM[r].te}</p><h2>${ROOM[r].n}</h2><p>${ROOM[r].t}</p>
+  ${r === 'wardrobes' ? '<div class="seg" role="group" aria-label="Bedroom"><button type="button" data-b="bedroom1">Bedroom 1</button><button type="button" data-b="bedroom2">Bedroom 2</button></div>' : ''}</div>
+  <figure class="today"><img id="t-${r}" src="${DATA[r].site.replace('{bed}', bed)}" alt="${ROOM[r].n} today" loading="lazy"><figcaption>Today</figcaption></figure></div>
+  <div class="grid${r === 'chimney' || r === 'pooja' ? ' three' : ''}" id="g-${r}" style="--ar:${DATA[r].ar}"></div></section>`).join('');
+
+function grid(r) {
+  $('g-' + r).innerHTML = DATA[r].items.map((o, i) => `<button class="card" type="button" data-r="${r}" data-i="${i}"${chosen[r] === o.id ? ' data-chosen' : ''}>
+    <span class="pic"><img src="${url(r, 'thumb', o.id, bed)}" alt="" loading="lazy"><span class="no">${i + 1}</span></span>
+    <strong>${esc(o.name)}</strong>${chosen[r] === o.id ? '<span class="tag">Chosen</span>' : o.pick ? `<span class="tag">${esc(o.pick === 'My first choice' ? 'First choice' : o.pick)}</span>` : ''}
+    <span class="fin">${esc(o.rows[0][1])}</span></button>`).join('');
+}
+function beds() {
+  document.querySelectorAll('[data-b]').forEach(b => b.setAttribute('aria-pressed', b.dataset.b === bed));
+  $('t-wardrobes').src = DATA.wardrobes.site.replace('{bed}', bed);
+}
+function show() {
+  const [r, i] = cur, o = DATA[r].items[i];
+  $('dImg').src = old ? DATA[r].site.replace('{bed}', bed) : url(r, 'img', o.id, bed);
+  $('dImg').alt = old ? ROOM[r].n + ' today' : o.name;
+  $('dNo').textContent = `${ROOM[r].w} No. ${i + 1}`;
+  $('dName').textContent = o.name;
+  $('dWhy').textContent = o.why;
+  $('dRows').innerHTML = `<div><dt>Colours</dt><dd><span class="sw">${[...new Set(o.sw)].map(c => `<i style="background:${c}"></i>`).join('')}</span></dd></div>` + o.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
+  $('dBeds').hidden = r !== 'wardrobes';
+  $('sNew').setAttribute('aria-pressed', !old); $('sOld').setAttribute('aria-pressed', old);
+  $('dPick').textContent = chosen[r] === o.id ? 'Remove choice' : 'Choose this';
+}
+function list() {
+  $('chosen').innerHTML = ORDER.map(r => { const i = at(r, chosen[r]); return `<li><span class="soft">${ROOM[r].w}</span>${i < 0 ? '<span class="soft">Not chosen yet</span>' : `<button type="button" class="link" style="text-align:left" data-r="${r}" data-i="${i}">No. ${i + 1} ${esc(DATA[r].items[i].name)}</button>`}</li>`; }).join('');
+  $('copy').disabled = !Object.keys(chosen).length;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-b]');
+  if (b) { bed = b.dataset.b; beds(); grid('wardrobes'); if (cur && $('dlg').open) show(); return; }
+  const c = e.target.closest('[data-r]');
+  if (c) { cur = [c.dataset.r, +c.dataset.i]; old = false; show(); if (!$('dlg').open) $('dlg').showModal(); $('dlg').scrollTop = 0; }
+});
+const step = d => { const n = DATA[cur[0]].items.length; cur[1] = (cur[1] + d + n) % n; old = false; show(); $('dlg').scrollTop = 0; };
+$('dPrev').onclick = () => step(-1); $('dNext').onclick = () => step(1);
+$('dClose').onclick = () => $('dlg').close();
+$('dlg').addEventListener('click', e => { if (e.target === $('dlg')) $('dlg').close(); });
+$('dlg').addEventListener('keydown', e => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+$('sNew').onclick = () => { old = false; show(); }; $('sOld').onclick = () => { old = true; show(); };
+$('dPick').onclick = () => {
+  const [r, i] = cur, id = DATA[r].items[i].id;
+  if (chosen[r] === id) delete chosen[r]; else chosen[r] = id;
+  try { localStorage.setItem('house-choice', JSON.stringify(chosen)); } catch (e) {}
+  grid(r); list(); show();
+};
+$('copy').onclick = async () => {
+  const text = 'Our house choice\n' + ORDER.filter(r => chosen[r]).map(r => `${ROOM[r].w} No. ${at(r, chosen[r]) + 1}: ${DATA[r].items[at(r, chosen[r])].name}`).join('\n');
+  try { await navigator.clipboard.writeText(text); $('copied').textContent = 'Copied. Paste it in WhatsApp.'; }
+  catch (e) { const s = getSelection(), g = document.createRange(); g.selectNodeContents($('chosen')); s.removeAllRanges(); s.addRange(g); $('copied').textContent = 'The list is selected. Copy it from the menu.'; }
+};
+ORDER.forEach(grid); beds(); list();
+</script>
+
+</body>
+</html>
